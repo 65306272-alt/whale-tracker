@@ -151,86 +151,70 @@
 
                 <!-- ==================== 面板 2: 信号列表 (最宽) ==================== -->
                 <div id="panelSignals" class="wt-panel flex flex-col" style="min-width:360px; flex:1 0 0">
-                    <div class="wt-panel-header flex items-center justify-between px-3 py-1.5 border-b border-gray-800 bg-[#161b22]">
-                        <div class="flex items-center gap-1.5">
-                            <span>📋</span>
-                            <span class="text-xs font-medium">信号列表</span>
+                    <div class="wt-panel-header wt-signals-header flex items-center justify-between px-2 py-1 border-b border-gray-800 bg-[#161b22]">
+                        <!-- 左: 3 个文件夹按钮 紧凑靠左 -->
+                        <div class="flex items-center gap-0.5">
+                            <button class="wt-folder-btn wt-folder-active"   data-sub="ob"    title="订单簿">📒 订单簿</button>
+                            <button class="wt-folder-btn"                   data-sub="sig"   title="信号详情">📊 信号详情</button>
+                            <button class="wt-folder-btn"                   data-sub="near"  title="快达标信号">⚡ 快达标</button>
                         </div>
+                        <!-- 右: 状态 + toggle -->
                         <div class="flex items-center gap-1">
-                            <div class="flex items-center gap-1.5 mr-2">
+                            <div class="flex items-center gap-1 mr-1">
                                 <span class="text-[10px] text-gray-500">快达标</span>
                                 <span id="nearSignalCount" class="text-[10px] font-bold text-yellow-400 font-mono">0</span>
                             </div>
-                            <button id="btnToggleScore" class="wt-mini-btn px-1.5 py-0.5 rounded text-[10px] border border-gray-700 bg-gray-800 hover:bg-gray-700 text-gray-300 transition" title="Score 历史">📈 Score</button>
-                            <button id="btnToggleLog"   class="wt-mini-btn px-1.5 py-0.5 rounded text-[10px] border border-gray-700 bg-gray-800 hover:bg-gray-700 text-gray-300 transition" title="实时日志">📜 日志</button>
+                            <button id="btnToggleScore" class="wt-mini-btn" title="Score 历史">📈</button>
+                            <button id="btnToggleLog"   class="wt-mini-btn" title="实时日志">📜</button>
                         </div>
                     </div>
                     <div class="wt-panel-body flex-1 p-1.5 overflow-auto flex flex-col gap-1">
 
                         <!-- 2.1 订单簿 -->
-                        <div class="wt-subcard">
-                            <div class="wt-subcard-header">
+                        <div id="sub-ob" class="wt-subcard">
+                            <div class="flex items-center justify-between mb-1">
                                 <div class="flex items-center gap-1.5">
-                                    <span class="wt-subcard-icon">📒</span>
-                                    <span class="text-[10px] text-gray-400 font-medium">订单簿</span>
+                                    <span class="wt-folder-icon">📒</span>
                                     <span id="obSymbolLabel" class="text-[10px] font-mono text-gray-500">SUI/USDT</span>
                                 </div>
                                 <span id="spreadLabel" class="text-[10px] text-gray-600 font-mono">Spread 0.03%</span>
                             </div>
-                            <div class="wt-subcard-body">
-                                <div class="orderbook-grid grid grid-cols-2 gap-2 text-[10px]">
-                                    <div>
-                                        <div class="text-gray-600 mb-0.5 text-left"><span>卖盘 ASK</span><span class="text-gray-600 ml-2">数量</span></div>
-                                        <div id="asksList" class="flex flex-col gap-[1px]"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-gray-600 mb-0.5 text-left"><span>买盘 BID</span><span class="text-gray-600 ml-2">数量</span></div>
-                                        <div id="bidsList" class="flex flex-col gap-[1px]"></div>
-                                    </div>
+                            <div class="orderbook-grid grid grid-cols-2 gap-2 text-[10px]">
+                                <div>
+                                    <div class="text-gray-600 mb-0.5 text-left"><span>卖盘 ASK</span><span class="text-gray-600 ml-2">数量</span></div>
+                                    <div id="asksList" class="flex flex-col gap-[1px]"></div>
+                                </div>
+                                <div>
+                                    <div class="text-gray-600 mb-0.5 text-left"><span>买盘 BID</span><span class="text-gray-600 ml-2">数量</span></div>
+                                    <div id="bidsList" class="flex flex-col gap-[1px]"></div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- 2.2 信号详情 -->
-                        <div class="wt-subcard">
-                            <div class="wt-subcard-header">
-                                <div class="flex items-center gap-1.5">
-                                    <span class="wt-subcard-icon">📊</span>
-                                    <span class="text-[10px] text-gray-400 font-medium">信号详情 · 评分分解</span>
-                                </div>
+                        <div id="sub-sig" class="wt-subcard hidden">
+                            <div class="grid grid-cols-2 gap-x-3 gap-y-0.5 text-[11px] text-left mb-1">
+                                <div><span class="text-gray-500">大户 40%</span>  <span id="detailWhale" class="font-mono text-green-400 ml-1">+42</span></div>
+                                <div><span class="text-gray-500">清算 25%</span>  <span id="detailLiq" class="font-mono text-yellow-400 ml-1">+15</span></div>
+                                <div><span class="text-gray-500">拥挤 20%</span>  <span id="detailCrowd" class="font-mono text-purple-400 ml-1">-28</span></div>
+                                <div><span class="text-gray-500">订单簿 15%</span><span id="detailOb" class="font-mono text-blue-400 ml-1">+12</span></div>
                             </div>
-                            <div class="wt-subcard-body">
-                                <div class="grid grid-cols-2 gap-x-3 gap-y-0.5 text-[11px] text-left">
-                                    <div><span class="text-gray-500">大户 40%</span>  <span id="detailWhale" class="font-mono text-green-400 ml-1">+42</span></div>
-                                    <div><span class="text-gray-500">清算 25%</span>  <span id="detailLiq" class="font-mono text-yellow-400 ml-1">+15</span></div>
-                                    <div><span class="text-gray-500">拥挤 20%</span>  <span id="detailCrowd" class="font-mono text-purple-400 ml-1">-28</span></div>
-                                    <div><span class="text-gray-500">订单簿 15%</span><span id="detailOb" class="font-mono text-blue-400 ml-1">+12</span></div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-gray-500 text-[11px]">加权</span>
+                                    <span id="detailTotal" class="text-base font-bold font-mono text-emerald-400">+26.1</span>
                                 </div>
-                                <div class="border-t border-gray-800 mt-1 pt-1 flex items-center justify-between">
-                                    <div class="flex items-center gap-2">
-                                        <span class="text-gray-500 text-[11px]">加权</span>
-                                        <span id="detailTotal" class="text-base font-bold font-mono text-emerald-400">+26.1</span>
-                                    </div>
-                                    <div class="flex gap-1">
-                                        <button id="btnQuickBuy"  class="px-2 py-0.5 bg-green-700 hover:bg-green-600 rounded text-[11px] transition font-medium">开多</button>
-                                        <button id="btnQuickSell" class="px-2 py-0.5 bg-red-700 hover:bg-red-600 rounded text-[11px] transition font-medium">开空</button>
-                                    </div>
+                                <div class="flex gap-1">
+                                    <button id="btnQuickBuy"  class="px-2 py-0.5 bg-green-700 hover:bg-green-600 rounded text-[11px] transition font-medium">开多</button>
+                                    <button id="btnQuickSell" class="px-2 py-0.5 bg-red-700 hover:bg-red-600 rounded text-[11px] transition font-medium">开空</button>
                                 </div>
                             </div>
                         </div>
 
                         <!-- 2.3 快达标信号 -->
-                        <div class="wt-subcard">
-                            <div class="wt-subcard-header">
-                                <div class="flex items-center gap-1.5">
-                                    <span class="wt-subcard-icon">⚡</span>
-                                    <span class="text-[10px] text-gray-400 font-medium">快达标 · 监控中</span>
-                                </div>
-                            </div>
-                            <div class="wt-subcard-body p-0">
-                                <div id="nearSignalList" class="flex flex-col gap-0 text-[11px] font-mono">
-                                    <!-- 动态填充 -->
-                                </div>
+                        <div id="sub-near" class="wt-subcard hidden">
+                            <div id="nearSignalList" class="flex flex-col gap-0 text-[11px] font-mono">
+                                <!-- 动态填充 -->
                             </div>
                         </div>
                     </div>

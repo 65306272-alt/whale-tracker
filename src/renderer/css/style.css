@@ -232,3 +232,46 @@ canvas { display: block; width: 100% !important; height: 100% !important; }
 .wt-subcard-body > * {
     text-align: left;
 }
+
+/* ═══════════════════════════════════════════════════════
+   文件夹按钮 (panel header 里)
+   ═══════════════════════════════════════════════════════ */
+.wt-folder-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 2px 7px;
+    font-size: 10px;
+    line-height: 1;
+    color: #8b949e;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: 500;
+    letter-spacing: 0;
+    white-space: nowrap;
+    transition: background 0.12s, color 0.12s, border-color 0.12s;
+    text-align: left;
+}
+.wt-folder-btn:hover {
+    background: rgba(56,139,253,0.1);
+    color: #58a6ff;
+    border-color: #1f6feb33;
+}
+.wt-folder-btn.wt-folder-active {
+    background: rgba(56,139,253,0.15);
+    color: #79c0ff;
+    border-color: #1f6feb;
+}
+.wt-folder-icon { font-size: 10px; }
+
+/* 子卡片: 紧凑, 无额外圆角/边框 (父级已分组) */
+.wt-signals-header + .wt-panel-body .wt-subcard {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    overflow: visible;
+    padding: 0;
+}
+.wt-signals-header + .wt-panel-body .wt-subcard .wt-folder-icon { display: none; }

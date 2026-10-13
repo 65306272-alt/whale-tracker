@@ -411,6 +411,21 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('signalLog').innerHTML = '';
     });
 
+    // ===== 信号列表 header 里的 3 个文件夹按钮: 切换子块显示 =====
+    (function initFolderTabs() {
+        const map = { 'ob':'sub-ob', 'sig':'sub-sig', 'near':'sub-near' };
+        const btns = document.querySelectorAll('.wt-folder-btn[data-sub]');
+        const setActive = (key) => {
+            btns.forEach(b => b.classList.toggle('wt-folder-active', b.dataset.sub === key));
+            for (const [k, id] of Object.entries(map)) {
+                const el = document.getElementById(id);
+                if (el) el.classList.toggle('hidden', k !== key);
+            }
+        };
+        btns.forEach(b => b.addEventListener('click', () => setActive(b.dataset.sub)));
+        setActive('ob');   // 默认显示订单簿
+    })();
+
     // ===== 信号列表 header 里的 Score / 日志 toggle 按钮 =====
     (function initFooterToggle() {
         const footer = document.getElementById('bottomFooter');
