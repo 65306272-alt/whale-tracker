@@ -360,6 +360,29 @@
 
     <!-- JS 库 (本地离线打包) -->
     <script src="libs/tailwind.standalone.js"></script>
+    <script>
+        // 确保 tailwind standalone 扫描配置正确
+        if (window.tailwind) {
+            window.tailwind.config = window.tailwind.config || {};
+        }
+        // 等 DOM 稳定后强制触发 MutationObserver 重扫
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                // 触发一次 class 变化 → Tailwind MutationObserver 会重新扫描所有 [class]
+                const el = document.body;
+                if (el) {
+                    el.setAttribute('data-tailwind-trigger', Date.now());
+                }
+                // 再触发一次子节点变化更保险
+                const dummy = document.createElement('span');
+                dummy.className = 'hidden';
+                dummy.style.display = 'none';
+                document.body.appendChild(dummy);
+                requestAnimationFrame(() => dummy.remove());
+                console.log('[WT] Tailwind re-triggered, CSS size:', (document.head.querySelector('style')?.textContent?.length || 0), 'bytes');
+            }, 50);
+        });
+    </script>
     <script src="libs/lightweight-charts.standalone.production.js"></script>
     <script src="libs/chart.umd.min.js"></script>
 
