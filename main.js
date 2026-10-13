@@ -87,8 +87,8 @@ function createMainWindow() {
         frame: true,           // 原生窗口边框 (Mac 上会是 traffic light)
         titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : 'default',
         backgroundColor: '#0d1117',
-        show: false,
-        paintWhenInitiallyHidden: true,
+        show: true,
+        
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
             contextIsolation: true,
@@ -109,15 +109,33 @@ function createMainWindow() {
     });
 
     // 加载渲染进程页面
+    console.log('[WT] Loading index.html...');
     mainWindow.loadFile(path.join(__dirname, 'src/renderer/index.html'));
+    mainWindow.webContents.on('did-finish-load', () => {
+        console.log('[WT] did-finish-load, DOM ready');
+    });
+    mainWindow.webContents.on('did-fail-load', (e, code, desc) => {
+        console.error('[WT] did-fail-load:', code, desc);
+    });
 
     // 窗口准备好之后再显示（避免白屏闪烁）
     mainWindow.once('ready-to-show', () => {
+        console.log('[WT] ready-to-show fired, showing window...');
         mainWindow.show();
+        mainWindow.focus();
         if (savedState?.isMaximized) {
             mainWindow.maximize();
         }
     });
+    // 兜底: 如果 ready-to-show 不触发 (Mac 偶发), 3 秒后强制显示
+    setTimeout(() => {
+        if (!mainWindow || mainWindow.isDestroyed()) return;
+        if (!mainWindow.isVisible()) {
+            console.log('[WT] ready-to-show did not fire, forcing show after 3s');
+            mainWindow.show();
+            mainWindow.focus();
+        }
+    }, 3000);
 
     // 关闭时保存窗口状态
     mainWindow.on('close', (e) => {
