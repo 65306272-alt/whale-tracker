@@ -197,3 +197,38 @@ canvas { display: block; width: 100% !important; height: 100% !important; }
 /* === 响应式 === */
 @media (max-width: 1920px) { body { zoom: 1.0; } }
 @media (max-width: 1600px) { body { zoom: 0.92; font-size: 12px; } }
+
+/* ═══════════════════════════════════════════════════════
+   信号列表子卡片 — 文件夹样式
+   ═══════════════════════════════════════════════════════ */
+.wt-subcard {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 6px;
+    overflow: hidden;
+    text-align: left;       /* 靠左对齐 */
+}
+.wt-subcard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3px 8px;
+    font-size: 10px;
+    font-weight: 500;
+    background: #161b22;
+    border-bottom: 1px solid #21262d;
+    color: #8b949e;
+}
+.wt-subcard-icon {
+    font-size: 10px;
+    line-height: 1;
+}
+.wt-subcard-body {
+    padding: 6px 8px;
+    font-size: 11px;
+    color: #c9d1d9;
+    text-align: left;
+}
+.wt-subcard-body > * {
+    text-align: left;
+}
