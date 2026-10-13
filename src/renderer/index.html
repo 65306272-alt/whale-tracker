@@ -221,84 +221,82 @@
                 </div>
 
                 <!-- ==================== 面板 3: 参数修改 ==================== -->
-                <div id="panelParams" class="wt-panel flex flex-col" style="min-width:200px; flex:0 0 auto">
-                    <div class="wt-panel-header flex items-center justify-between px-3 py-1.5 border-b border-gray-800 bg-[#161b22]">
-                        <div class="flex items-center gap-1">
+                <div id="panelParams" class="wt-panel flex flex-col" style="min-width:180px; flex:0 0 auto">
+                    <div class="wt-panel-header flex items-center justify-between px-1.5 py-0.5 border-b border-gray-800 bg-[#161b22]">
+                        <div class="flex items-center gap-0.5">
                             <span>⚙️</span>
-                            <span class="text-xs font-medium">参数修改</span>
+                            <span class="text-[11px] font-medium">参数</span>
                         </div>
-                        <!-- 自动交易开关 -->
-                        <div class="flex items-center gap-1">
-                            <span class="text-[10px] text-gray-500">自动交易</span>
+                        <!-- 右: 应用/重置 + 自动交易 -->
+                        <div class="flex items-center gap-0.5">
+                            <button id="applyParams"  class="px-1.5 py-0 bg-blue-600 hover:bg-blue-500 rounded text-[10px] font-medium leading-tight">应用</button>
+                            <button id="resetParams"  class="px-1.5 py-0 bg-gray-700 hover:bg-gray-600 rounded text-[10px] leading-tight">重置</button>
+                            <span class="w-px h-3 bg-gray-700 mx-0.5"></span>
+                            <span class="text-[9px] text-gray-500">自动</span>
                             <label class="toggle-switch" title="开启后信号触发自动下单">
                                 <input type="checkbox" id="autoTradeEnabled">
                                 <span class="toggle-slider"></span>
                             </label>
                         </div>
                     </div>
-                    <div class="wt-panel-body flex-1 p-1 overflow-hidden flex flex-col gap-0.5">
+                    <div class="wt-panel-body flex-1 p-0.5 overflow-hidden flex flex-col gap-0">
                         <!-- EMA -->
-                        <div class="bg-[#0d1117] rounded p-1 border border-gray-800">
-                            <div class="text-[9px] text-gray-500 mb-0.5 font-medium">均线参数</div>
-                            <div class="flex items-center gap-1 text-[10px]">
-                                <label class="text-gray-500 w-12">EMA 短</label>
-                                <input id="emaShort" type="number" value="9" min="2" class="wt-input w-10 bg-[#0d1117] border border-gray-700 rounded px-1 py-0 text-center font-mono text-[10px]">
+                        <div class="bg-[#0d1117] rounded-sm p-0.5 border border-gray-800">
+                            <div class="text-[8px] text-gray-500 mb-0 font-medium uppercase tracking-wide">均线参数</div>
+                            <div class="flex items-center gap-0.5 text-[9px]">
+                                <label class="text-gray-500 w-10">EMA 短</label>
+                                <input id="emaShort" type="number" value="9" min="2" class="wt-input w-9 bg-[#0d1117] border border-gray-700 rounded-sm px-1 py-0 text-center font-mono text-[9px]">
                                 <label class="text-gray-500 w-10">EMA 长</label>
-                                <input id="emaLong" type="number" value="55" min="5" class="wt-input w-12 bg-[#0d1117] border border-gray-700 rounded px-1 py-0 text-center font-mono text-[10px]">
+                                <input id="emaLong" type="number" value="55" min="5" class="wt-input w-10 bg-[#0d1117] border border-gray-700 rounded-sm px-1 py-0 text-center font-mono text-[9px]">
                             </div>
                         </div>
 
                         <!-- 阈值 -->
-                        <div class="bg-[#0d1117] rounded p-1 border border-gray-800">
-                            <div class="text-[9px] text-gray-500 mb-0.5 font-medium">信号阈值</div>
-                            <div class="flex flex-col gap-0.5 text-[10px]">
-                                <div class="flex items-center gap-1">
-                                    <label class="text-gray-500 w-12">大户阈值</label>
-                                    <input id="whaleThreshold" type="number" value="50000" step="1000" class="wt-input flex-1 bg-[#0d1117] border border-gray-700 rounded px-1 py-0 text-center font-mono text-[10px]">
-                                    <span class="text-gray-600 text-[9px] w-12">USDT</span>
+                        <div class="bg-[#0d1117] rounded-sm p-0.5 border border-gray-800">
+                            <div class="text-[8px] text-gray-500 mb-0 font-medium uppercase tracking-wide">信号阈值</div>
+                            <div class="flex flex-col gap-0 text-[9px]">
+                                <div class="flex items-center gap-0.5">
+                                    <label class="text-gray-500 w-10">大户阈值</label>
+                                    <input id="whaleThreshold" type="number" value="50000" step="1000" class="wt-input flex-1 bg-[#0d1117] border border-gray-700 rounded-sm px-1 py-0 text-center font-mono text-[9px]">
+                                    <span class="text-gray-600 text-[8px] w-10">USDT</span>
                                 </div>
-                                <div class="flex items-center gap-1">
-                                    <label class="text-gray-500 w-12">冷却期</label>
-                                    <input id="cooldown" type="number" value="20" min="0" class="wt-input flex-1 bg-[#0d1117] border border-gray-700 rounded px-1 py-0 text-center font-mono text-[10px]">
-                                    <span class="text-gray-600 text-[9px] w-12">分钟</span>
+                                <div class="flex items-center gap-0.5">
+                                    <label class="text-gray-500 w-10">冷却期</label>
+                                    <input id="cooldown" type="number" value="20" min="0" class="wt-input flex-1 bg-[#0d1117] border border-gray-700 rounded-sm px-1 py-0 text-center font-mono text-[9px]">
+                                    <span class="text-gray-600 text-[8px] w-10">分钟</span>
                                 </div>
                             </div>
                         </div>
 
                         <!-- 仓位管理 -->
-                        <div class="bg-[#0d1117] rounded p-1 border border-gray-800">
-                            <div class="text-[9px] text-gray-500 mb-0.5 font-medium">仓位管理</div>
-                            <div class="flex flex-col gap-0.5 text-[10px]">
-                                <div class="flex items-center gap-1">
-                                    <label class="text-gray-500 w-12">止损</label>
-                                    <input id="stopLoss" type="number" value="1.0" step="0.1" class="wt-input flex-1 bg-[#0d1117] border border-gray-700 rounded px-1 py-0 text-center font-mono text-[10px]">
-                                    <span class="text-gray-600 text-[9px] w-12">%</span>
+                        <div class="bg-[#0d1117] rounded-sm p-0.5 border border-gray-800">
+                            <div class="text-[8px] text-gray-500 mb-0 font-medium uppercase tracking-wide">仓位管理</div>
+                            <div class="flex flex-col gap-0 text-[9px]">
+                                <div class="flex items-center gap-0.5">
+                                    <label class="text-gray-500 w-10">止损</label>
+                                    <input id="stopLoss" type="number" value="1.0" step="0.1" class="wt-input flex-1 bg-[#0d1117] border border-gray-700 rounded-sm px-1 py-0 text-center font-mono text-[9px]">
+                                    <span class="text-gray-600 text-[8px] w-10">%</span>
                                 </div>
-                                <div class="flex items-center gap-1">
-                                    <label class="text-gray-500 w-12">目标</label>
-                                    <input id="takeProfit" type="number" value="6.0" step="0.5" class="wt-input flex-1 bg-[#0d1117] border border-gray-700 rounded px-1 py-0 text-center font-mono text-[10px]">
-                                    <span class="text-gray-600 text-[9px] w-12">%</span>
+                                <div class="flex items-center gap-0.5">
+                                    <label class="text-gray-500 w-10">目标</label>
+                                    <input id="takeProfit" type="number" value="6.0" step="0.5" class="wt-input flex-1 bg-[#0d1117] border border-gray-700 rounded-sm px-1 py-0 text-center font-mono text-[9px]">
+                                    <span class="text-gray-600 text-[8px] w-10">%</span>
                                 </div>
-                                <div class="flex items-center gap-1">
-                                    <label class="text-gray-500 w-12">仓位</label>
-                                    <input id="positionPct" type="number" value="15" min="1" max="50" class="wt-input flex-1 bg-[#0d1117] border border-gray-700 rounded px-1 py-0 text-center font-mono text-[10px]">
-                                    <span class="text-gray-600 text-[9px] w-12">%</span>
+                                <div class="flex items-center gap-0.5">
+                                    <label class="text-gray-500 w-10">仓位</label>
+                                    <input id="positionPct" type="number" value="15" min="1" max="50" class="wt-input flex-1 bg-[#0d1117] border border-gray-700 rounded-sm px-1 py-0 text-center font-mono text-[9px]">
+                                    <span class="text-gray-600 text-[8px] w-10">%</span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 应用 / 重置 -->
-                        <div class="flex gap-1">
-                            <button id="applyParams" class="flex-1 px-2 py-0.5 bg-blue-600 hover:bg-blue-500 rounded text-[10px] font-medium transition">应用</button>
-                            <button id="resetParams" class="px-2 py-0.5 bg-gray-700 hover:bg-gray-600 rounded text-[10px] transition">重置</button>
-                        </div>
                     </div>
                 </div>
 
                 <!-- ==================== 面板 4: 持仓列表 ==================== -->
                 <div id="panelPositions" class="wt-panel flex flex-col" style="min-width:340px; flex:1 0 0">
                     <div class="wt-panel-header flex items-center justify-between px-3 py-1.5 border-b border-gray-800 bg-[#161b22]">
-                        <div class="flex items-center gap-1">
+                        <div class="flex items-center gap-0.5">
                             <span>💼</span>
                             <span class="text-xs font-medium">持仓列表</span>
                         </div>
