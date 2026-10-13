@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- Electron 渲染进程必须的 JIT 权限 -->
+    <key>com.apple.security.cs.allow-jit</key>
+    <true/>
+    <!-- 允许加载外部动态库 (Electron runtime 自身需要) -->
+    <key>com.apple.security.cs.allow-unsigned-executable-memory</key>
+    <true/>
+    <!-- 允许连接网络 (Binance WS / CoinGlass WS / Hyperliquid) -->
+    <key>com.apple.security.network.client</key>
+    <true/>
+    <!-- 允许显示通知 -->
+    <key>com.apple.security.assets.movies.read-write</key>
+    <true/>
+    <!-- 禁用 App Sandbox (交易应用需要, 签名发布时可启用) -->
+    <key>com.apple.security.app-sandbox</key>
+    <false/>
+</dict>
+</plist>

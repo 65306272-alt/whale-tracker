@@ -1,0 +1,98 @@
+{
+  "name": "whale-tracker",
+  "version": "1.0.0",
+  "description": "山寨币大户资金流向追踪系统 - 桌面独立应用",
+  "author": "WhaleTracker",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder",
+    "dist:win": "electron-builder --win",
+    "dist:mac": "electron-builder --mac dmg --arm64 --x64 --publish never",
+    "dist:linux": "electron-builder --linux",
+    "start:linux": "electron --no-sandbox --disable-gpu .",
+    "start:dev": "electron --no-sandbox --enable-logging .",
+    "pack:linux": "electron-builder --linux dir --x64",
+    "pack:mac:app": "electron-builder --mac dir --publish never",
+    "pack:mac:zip": "electron-builder --mac zip --publish never",
+    "dist:mac:arm": "electron-builder --mac dmg --arm64 --publish never",
+    "dist:mac:x64": "electron-builder --mac dmg --x64 --publish never"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.1.8",
+    "dmg-license": "^1.0.11"
+  },
+  "build": {
+    "appId": "com.whaletracker.app",
+    "productName": "WhaleTracker",
+    "asar": true,
+    "asarUnpack": [],
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "src/renderer/**/*",
+      "!node_modules",
+      "!dist",
+      "!*.md",
+      "!*.log"
+    ],
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "extendInfo": {
+        "NSHighResolutionCapable": true,
+        "LSUIElement": false,
+        "NSRequiresAquaSystemAppearance": false,
+        "CFBundleDisplayName": "WhaleTracker"
+      }
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Finance"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "shortcutName": "WhaleTracker"
+    },
+    "publish": null
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

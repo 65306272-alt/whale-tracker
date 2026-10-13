@@ -1,0 +1,193 @@
+/* ==========================================================================
+   WhaleTracker - Electron 桌面应用样式
+   目标设备：Redmi A27U (3840x2160 @ 27" ≈ 163 PPI)
+   ========================================================================== */
+
+:root {
+    --bg-primary:    #0d1117;
+    --bg-secondary:  #161b22;
+    --bg-tertiary:   #21262d;
+    --bg-hover:      #30363d;
+    --border:        #30363d;
+    --text-primary:  #e6edf3;
+    --text-secondary:#8b949e;
+    --text-muted:    #484f58;
+
+    --up:        #26a69a;
+    --up-dark:   #0d5d4f;
+    --down:      #ef5350;
+    --down-dark: #8b2a2a;
+    --blue:      #4d8bf0;
+    --yellow:    #f2b94a;
+    --purple:    #a371f7;
+
+    --text-xxs: 12px;
+    --text-xs:  13px;
+    --text-sm:  14px;
+    --text-base:15px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+    height: 100%; width: 100%;
+    overflow: hidden;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+                 "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    font-size: var(--text-sm);
+    -webkit-font-smoothing: antialiased;
+    color-scheme: dark;
+    zoom: 1.08;
+}
+html { scroll-behavior: smooth; }
+
+/* === 顶栏 === */
+.wt-header {
+    -webkit-app-region: drag;
+    user-select: none;
+}
+.wt-header button, .wt-header select, .wt-header input, .wt-header div, .wt-header label {
+    -webkit-app-region: no-drag;
+}
+
+.wt-select {
+    appearance: none;
+    padding: 4px 24px 4px 8px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%238b949e' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 6px center;
+    cursor: pointer;
+    transition: border-color 0.15s;
+}
+.wt-select:hover { border-color: var(--blue); }
+
+.wt-input {
+    font-family: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    transition: border-color 0.15s, background 0.15s;
+}
+.wt-input:hover { border-color: var(--text-muted); }
+.wt-input:focus {
+    outline: none;
+    border-color: var(--blue);
+    background: rgba(77, 139, 240, 0.08);
+}
+.wt-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.wt-input { -moz-appearance: textfield; }
+
+/* === 面板 === */
+.wt-panel {
+    background: var(--bg-primary);
+    min-height: 150px;
+    overflow: hidden;
+    border-right: 1px solid #30363d;
+}
+.wt-panel:last-child { border-right: none; }
+
+.wt-panel-header {
+    background: var(--bg-secondary);
+    -webkit-app-region: no-drag;
+}
+
+/* === 自动交易开关 (toggle switch) === */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 36px;
+    height: 18px;
+    cursor: pointer;
+}
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.toggle-slider {
+    position: absolute;
+    inset: 0;
+    background: #30363d;
+    border-radius: 18px;
+    transition: background 0.2s;
+}
+.toggle-slider::before {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    left: 2px;
+    top: 2px;
+    background: #8b949e;
+    border-radius: 50%;
+    transition: transform 0.2s, background 0.2s;
+}
+.toggle-switch input:checked + .toggle-slider {
+    background: #1a6040;
+}
+.toggle-switch input:checked + .toggle-slider::before {
+    transform: translateX(18px);
+    background: #26a69a;
+}
+
+/* === 订单簿 === */
+.ob-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 1px 6px;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    font-size: 10px;
+    line-height: 16px;
+}
+.ob-row.bid { background: linear-gradient(to left, rgba(38, 166, 154, 0.1), transparent); }
+.ob-row.ask { background: linear-gradient(to left, rgba(239, 83, 80, 0.1), transparent); }
+.ob-row.bid .ob-price { color: var(--up); }
+.ob-row.ask .ob-price { color: var(--down); }
+.ob-row .ob-qty { color: var(--text-muted); font-size: 9px; }
+.ob-row .ob-bar {
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    opacity: 0.3;
+    border-radius: 2px;
+    z-index: 0;
+}
+.ob-row > * { position: relative; z-index: 1; }
+
+/* === 币种卡片 hover 动画 === */
+.symbol-card .btn-del-symbol {
+    opacity: 0;
+    transition: opacity 0.15s;
+}
+.symbol-card:hover .btn-del-symbol {
+    opacity: 1;
+}
+
+/* === 信号日志 === */
+#signalLog .log-line {
+    padding: 0px 0;
+    display: flex;
+    gap: 6px;
+    line-height: 1.4;
+}
+#signalLog .log-time { color: var(--text-muted); flex-shrink: 0; font-size: 10px; }
+#signalLog .log-type { flex-shrink: 0; font-weight: 600; width: 52px; text-transform: uppercase; letter-spacing: 0.3px; font-size: 10px; }
+#signalLog .log-type.buy { color: var(--up); }
+#signalLog .log-type.sell { color: var(--down); }
+#signalLog .log-type.warn { color: var(--yellow); }
+#signalLog .log-type.info { color: var(--blue); }
+#signalLog .log-type.system { color: var(--text-muted); }
+#signalLog .log-msg { color: var(--text-secondary); }
+
+/* === 滚动条 === */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--bg-hover); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* === canvas === */
+canvas { display: block; width: 100% !important; height: 100% !important; }
+
+/* === 响应式 === */
+@media (max-width: 1920px) { body { zoom: 1.0; } }
+@media (max-width: 1600px) { body { zoom: 0.92; font-size: 12px; } }
