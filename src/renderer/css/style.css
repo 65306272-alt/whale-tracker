@@ -140,19 +140,25 @@ html { scroll-behavior: smooth; }
     font-size: 10px;
     line-height: 16px;
 }
-.ob-row.bid { background: linear-gradient(to left, rgba(38, 166, 154, 0.1), transparent); }
-.ob-row.ask { background: linear-gradient(to left, rgba(239, 83, 80, 0.1), transparent); }
+.ob-row.bid { }
+.ob-row.ask { }
 .ob-row.bid .ob-price { color: var(--up); }
 .ob-row.ask .ob-price { color: var(--down); }
 .ob-row .ob-qty { color: var(--text-muted); font-size: 9px; }
-.ob-row .ob-bar {
-    position: absolute;
-    right: 0; top: 0; bottom: 0;
-    opacity: 0.3;
-    border-radius: 2px;
-    z-index: 0;
-}
+
 .ob-row > * { position: relative; z-index: 1; }
+/* 纯文字订单簿 (无颜色条) */
+.ob-row-plain {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    padding: 1px 4px;
+    font-size: 10px;
+    line-height: 18px;
+}
+.ob-row-plain .ob-price { text-align: left; }
+.ob-row-plain .ob-qty   { text-align: right; color: var(--text-muted); }
+
 
 /* === 币种卡片 hover 动画 === */
 .symbol-card .btn-del-symbol {

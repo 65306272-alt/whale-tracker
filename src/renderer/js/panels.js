@@ -142,18 +142,16 @@ class PanelManager {
         }
 
         asks_div.innerHTML = snapshot.asks.slice(0, 6).reverse().map(r => `
-            <div class="ob-row ask">
-                <span class="ob-bar" style="width:${(r.qty/max_qty*100).toFixed(0)}%;background:rgba(239,83,80,0.2)"></span>
+            <div class="ob-row ask ob-row-plain">
                 <span class="ob-price font-mono">$${r.price.toFixed(2)}</span>
-                <span class="ob-qty font-mono">${r.qty.toFixed(0)}</span>
+                <span class="ob-qty font-mono text-right">${r.qty.toFixed(0)}</span>
             </div>
         `).join('');
 
         bids_div.innerHTML = snapshot.bids.slice(0, 6).map(r => `
-            <div class="ob-row bid">
-                <span class="ob-bar" style="width:${(r.qty/max_qty*100).toFixed(0)}%;background:rgba(38,166,154,0.2)"></span>
+            <div class="ob-row bid ob-row-plain">
                 <span class="ob-price font-mono">$${r.price.toFixed(2)}</span>
-                <span class="ob-qty font-mono">${r.qty.toFixed(0)}</span>
+                <span class="ob-qty font-mono text-right">${r.qty.toFixed(0)}</span>
             </div>
         `).join('');
     }
@@ -240,17 +238,10 @@ class PanelManager {
             const color = n.score > 0 ? '#26a69a' : '#ef5350';
             const bg = n.score > 0 ? 'rgba(38,166,154,' : 'rgba(239,83,80,';
             return `
-                <div class="near-signal-row flex items-center justify-between px-1.5 py-0.5 rounded bg-[#0d1117] border border-gray-800 hover:border-gray-600 cursor-pointer" data-symbol="${n.sym}">
-                    <div class="flex items-center gap-1.5">
-                        <span class="font-semibold text-gray-300">${n.sym}</span>
-                        <span class="text-[9px] font-medium" style="color:${color}">${dir}</span>
-                    </div>
-                    <div class="flex items-center gap-1.5">
-                        <div class="w-12 h-1 bg-gray-800 rounded-full overflow-hidden">
-                            <div class="h-full rounded-full" style="width:${pct.toFixed(0)}%;background:${color}"></div>
-                        </div>
-                        <span class="text-[10px]" style="color:${color}">${n.score >= 0 ? '+' : ''}${n.score.toFixed(0)}</span>
-                    </div>
+                <div class="near-signal-row ob-row-plain flex items-center justify-between px-1 py-0.5 rounded border border-gray-800 hover:border-gray-600 cursor-pointer font-mono" data-symbol="${n.sym}">
+                    <span class="text-gray-300">${n.sym}</span>
+                    <span class="text-[9px]" style="color:${color}">${dir}</span>
+                    <span class="text-[10px] w-8 text-right" style="color:${color}">${n.score >= 0 ? '+' : ''}${n.score.toFixed(0)}</span>
                 </div>
             `;
         }).join('');
