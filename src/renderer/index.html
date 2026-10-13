@@ -156,9 +156,13 @@
                             <span>📋</span>
                             <span class="text-xs font-medium">信号列表</span>
                         </div>
-                        <div class="flex items-center gap-1.5">
-                            <span class="text-[10px] text-gray-500">快达标</span>
-                            <span id="nearSignalCount" class="text-[10px] font-bold text-yellow-400 font-mono">0</span>
+                        <div class="flex items-center gap-1">
+                            <div class="flex items-center gap-1.5 mr-2">
+                                <span class="text-[10px] text-gray-500">快达标</span>
+                                <span id="nearSignalCount" class="text-[10px] font-bold text-yellow-400 font-mono">0</span>
+                            </div>
+                            <button id="btnToggleScore" class="wt-mini-btn px-1.5 py-0.5 rounded text-[10px] border border-gray-700 bg-gray-800 hover:bg-gray-700 text-gray-300 transition" title="Score 历史">📈 Score</button>
+                            <button id="btnToggleLog"   class="wt-mini-btn px-1.5 py-0.5 rounded text-[10px] border border-gray-700 bg-gray-800 hover:bg-gray-700 text-gray-300 transition" title="实时日志">📜 日志</button>
                         </div>
                     </div>
                     <div class="wt-panel-body flex-1 p-2 overflow-auto flex flex-col gap-2">
@@ -331,7 +335,7 @@
             </div>
 
             <!-- 底部: Score 曲线 + 实时日志 (横向并列) -->
-            <footer id="bottomFooter" style="height:120px; display:flex; border-top:1px solid #30363d">
+            <footer id="bottomFooter" style="height:0px; display:flex; border-top:1px solid #30363d; overflow:hidden; transition:height 0.2s ease" data-expanded="false">
 
                 <!-- Score 历史 (左半) -->
                 <div class="flex-1 flex flex-col border-r border-gray-800">

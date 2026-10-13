@@ -411,6 +411,41 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('signalLog').innerHTML = '';
     });
 
+    // ===== 信号列表 header 里的 Score / 日志 toggle 按钮 =====
+    (function initFooterToggle() {
+        const footer = document.getElementById('bottomFooter');
+        const btnS   = document.getElementById('btnToggleScore');
+        const btnL   = document.getElementById('btnToggleLog');
+        if (!footer || !btnS || !btnL) return;
+
+        const EXPANDED_H = 120;
+        let visible = false;
+
+        function setBtnActive(btn, active) {
+            if (active) {
+                btn.classList.remove('bg-gray-800', 'text-gray-300');
+                btn.classList.add('bg-blue-600', 'text-white', 'border-blue-500');
+            } else {
+                btn.classList.add('bg-gray-800', 'text-gray-300');
+                btn.classList.remove('bg-blue-600', 'text-white', 'border-blue-500');
+            }
+        }
+
+        function toggleFooter() {
+            visible = !visible;
+            footer.style.height = visible ? EXPANDED_H + 'px' : '0px';
+            footer.style.borderTop = visible ? '1px solid #30363d' : 'none';
+            footer.dataset.expanded = visible;
+            setBtnActive(btnS, visible);
+            setBtnActive(btnL, visible);
+        }
+
+        btnS.addEventListener('click', toggleFooter);
+        btnL.addEventListener('click', toggleFooter);
+        setBtnActive(btnS, false);
+        setBtnActive(btnL, false);
+    })();
+
     // ===== 持久化恢复 =====
     if (window.electronAPI) {
         const saved = window.electronAPI.loadConfig('params', null);
