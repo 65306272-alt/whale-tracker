@@ -191,24 +191,20 @@
                             </div>
                         </div>
 
-                        <!-- 2.2 信号详情 -->
-                        <div id="sub-sig" class="wt-subcard hidden">
-                            <div class="grid grid-cols-2 gap-x-3 gap-y-0.5 text-[11px] text-left mb-1">
-                                <div><span class="text-gray-500">大户 40%</span>  <span id="detailWhale" class="font-mono text-green-400 ml-1">+42</span></div>
-                                <div><span class="text-gray-500">清算 25%</span>  <span id="detailLiq" class="font-mono text-yellow-400 ml-1">+15</span></div>
-                                <div><span class="text-gray-500">拥挤 20%</span>  <span id="detailCrowd" class="font-mono text-purple-400 ml-1">-28</span></div>
-                                <div><span class="text-gray-500">订单簿 15%</span><span id="detailOb" class="font-mono text-blue-400 ml-1">+12</span></div>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center gap-2">
-                                    <span class="text-gray-500 text-[11px]">加权</span>
-                                    <span id="detailTotal" class="text-base font-bold font-mono text-emerald-400">+26.1</span>
-                                </div>
-                                <div class="flex gap-1">
-                                    <button id="btnQuickBuy"  class="px-2 py-0.5 bg-green-700 hover:bg-green-600 rounded text-[11px] transition font-medium">开多</button>
-                                    <button id="btnQuickSell" class="px-2 py-0.5 bg-red-700 hover:bg-red-600 rounded text-[11px] transition font-medium">开空</button>
-                                </div>
-                            </div>
+                        <!-- 2.2 信号详情 (横向一行) -->
+                        <div id="sub-sig" class="wt-subcard hidden flex items-center gap-2 text-[10px] font-mono leading-none py-0.5">
+                            <span id="detailSymbol" class="text-gray-300 font-semibold text-[11px]">SUI/USDT</span>
+                            <span class="text-gray-600">|</span>
+                            <span class="text-gray-500">大户</span><span id="detailWhale"  class="text-green-400 w-8 text-right">+42</span>
+                            <span class="text-gray-500">清算</span><span id="detailLiq"    class="text-yellow-400 w-8 text-right">+15</span>
+                            <span class="text-gray-500">拥挤</span><span id="detailCrowd"  class="text-purple-400 w-8 text-right">-28</span>
+                            <span class="text-gray-500">订单</span><span id="detailOb"     class="text-blue-400 w-8 text-right">+12</span>
+                            <span class="text-gray-600">|</span>
+                            <span class="text-gray-500">加权</span>
+                            <span id="detailTotal" class="text-sm font-bold text-emerald-400 w-10 text-right">+26.1</span>
+                            <span class="flex-1"></span>
+                            <button id="btnQuickBuy"  class="px-1.5 py-0.5 bg-green-700 hover:bg-green-600 rounded text-[10px] font-medium transition">开多</button>
+                            <button id="btnQuickSell" class="px-1.5 py-0.5 bg-red-700 hover:bg-red-600 rounded text-[10px] font-medium transition">开空</button>
                         </div>
 
                         <!-- 2.3 快达标信号 -->

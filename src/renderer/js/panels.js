@@ -163,6 +163,11 @@ class PanelManager {
     update_scores(r) {
         if (!r) return;
 
+        // 币种名 (和订单簿 obSymbolLabel 同步)
+        const sym = document.getElementById('obSymbolLabel');
+        const dsym = document.getElementById('detailSymbol');
+        if (dsym && sym) dsym.textContent = sym.textContent;
+
         // 评分分解面板
         document.getElementById('detailWhale').textContent = r.whale.toFixed(0);
         document.getElementById('detailLiq').textContent   = r.liq.toFixed(0);
@@ -171,7 +176,7 @@ class PanelManager {
         const total = r.total.toFixed(1);
         const total_el = document.getElementById('detailTotal');
         total_el.textContent = (r.total >= 0 ? '+' : '') + total;
-        total_el.className = 'text-base font-bold font-mono ' +
+        total_el.className = 'text-sm font-bold font-mono w-10 text-right ' +
             (r.total >= 25 ? 'text-emerald-400' : (r.total <= -25 ? 'text-red-400' : 'text-yellow-400'));
 
         // 顶部信号 label
